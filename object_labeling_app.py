@@ -21,7 +21,17 @@ if not st.session_state.running:
     # Base path for the dataset
     st.write("Please provide a path which points to the rendered image folders for the dataset you want to label.")
     st.session_state.datset_base_path = st.text_input(
-        'Dataset Base Path', value="/Users/damian/Datasets/objaverse/renders/")
+        'Dataset Base Path', value="./data")
+
+    if st.session_state.label_objaverse:
+        st.session_state.datset_base_path = st.session_state.datset_base_path + \
+            "/objaverse/renders"
+        st.write("expecting the objaverse renders to be in the folder:")
+        st.write(st.session_state.datset_base_path)
+    else:
+        st.session_state.datset_base_path = st.session_state.datset_base_path + "/shapenet/renders"
+        st.write("expecting the shapenet renders to be in the folder:")
+        st.write(st.session_state.datset_base_path)
 
 def load_votes_file(votes_path):
     if os.path.exists(votes_path):
